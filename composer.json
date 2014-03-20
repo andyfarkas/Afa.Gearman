@@ -1,0 +1,6 @@
+{
+    "name": "afa/gearman",
+    "autoload": {
+        "psr-4": {"Afa\\": "src\\Afa"}
+    }
+}
