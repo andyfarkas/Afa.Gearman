@@ -41,6 +41,15 @@ class Dispatcher implements IDispatcher
     {
         $data = json_decode($gearmanJob->workload(), true);
         $job = new Job($data);
-        $job->run($this->runner);
+
+        try
+        {
+            $job->run($this->runner);
+        }
+        catch (\Exception $e)
+        {
+            $gearmanJob->sendException($e->getMessage());
+            $gearmanJob->sendFail();
+        }
     }
 }
