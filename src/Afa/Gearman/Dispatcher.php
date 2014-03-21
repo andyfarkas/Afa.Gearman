@@ -36,6 +36,7 @@ class Dispatcher implements IDispatcher
 
     /**
      * @param \GearmanJob $gearmanJob
+     * @throws \RuntimeException
      */
     public function run(\GearmanJob $gearmanJob)
     {
@@ -50,6 +51,7 @@ class Dispatcher implements IDispatcher
         {
             $gearmanJob->sendException($e->getMessage());
             $gearmanJob->sendFail();
+            throw new \RuntimeException($e->getCode(), $e->getMessage(), $e);
         }
     }
 }
